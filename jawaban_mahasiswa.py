@@ -1,8 +1,10 @@
-# File: jawaban_mahasiswa.py (Solusi Pemula)
+# File: jawaban_mahasiswa.py (Solusi Profesional)
 def cari_pasangan(arr, target):
-    # Menggunakan perulangan bersarang (Kompleksitas O(N^2))
-    for i in range(len(arr)):
-        for j in range(i + 1, len(arr)):
-            if arr[i] + arr[j] == target:
-                return True
+    # Menggunakan Set (Kompleksitas O(N))
+    angka_dilihat = set()
+    for angka in arr:
+        pasangan_dibutuhkan = target - angka
+        if pasangan_dibutuhkan in angka_dilihat:
+            return True
+        angka_dilihat.add(angka)
     return False
