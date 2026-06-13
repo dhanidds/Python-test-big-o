@@ -1,36 +1,17 @@
-# test_kalkulator.py
+import pytest
+from jawaban_mahasiswa import cari_pasangan
 
-# Impor fungsi yang akan dites dari file mahasiswa
-from kalkulator import tambah, kurang, kali, bagi
+def test_fungsional_dasar():
+    assert cari_pasangan([10, 15, 3, 7], 17) == True  # 10 + 7 = 17
+    assert cari_pasangan([1, 2, 3, 4], 10) == False   # Tidak ada
+    assert cari_pasangan([5, 5, 2], 10) == True       # 5 + 5 = 10
 
-# Tes untuk fungsi tambah
-def test_tambah():
-    assert tambah(5, 3) == 8
-    assert tambah(-1, 1) == 0
-    assert tambah(-5, -5) == -10
-    assert tambah(10, 0) == 10
-
-# Tes untuk fungsi kurang
-def test_kurang():
-    assert kurang(10, 5) == 5
-    assert kurang(-1, 1) == -2
-    assert kurang(5, 10) == -5
-    assert kurang(0, 5) == -5
-
-# Tes untuk fungsi kali
-def test_kali():
-    assert kali(3, 4) == 12
-    assert kali(-2, 5) == -10
-    assert kali(7, 0) == 0
-    assert kali(-3, -3) == 9
-
-# Tes untuk fungsi bagi
-def test_bagi():
-    assert bagi(10, 2) == 5
-    assert bagi(-8, 4) == -2
-    assert bagi(9, 2) == 4.5
-
-# Tes untuk kasus khusus pembagian dengan nol
-def test_bagi_dengan_nol():
-    assert bagi(10, 0) == "Error: Pembagian dengan nol"
-    assert bagi(0, 0) == "Error: Pembagian dengan nol"
+# --- PENGUJIAN KOMPLEKSITAS BIG O (STRESS TEST) ---
+def test_big_o_complexity():
+    # Membuat array berukuran 50.000 elemen
+    # Format: [1, 2, 3, ..., 49999, 50000]
+    data_masif = list(range(1, 50001))
+    
+    # Target 99.999 hanya bisa didapat dari 49.999 + 50.000 (berada di paling akhir)
+    # Ini memaksa algoritma mengecek seluruh isi array
+    assert cari_pasangan(data_masif, 99999) == True
